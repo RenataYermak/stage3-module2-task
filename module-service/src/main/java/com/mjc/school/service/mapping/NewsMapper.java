@@ -17,8 +17,8 @@ public interface NewsMapper {
     @Mapping(target = "lastUpdateDate", ignore = true)
     NewsModel mapNewsRequestDtoToNews(NewsRequestDto dto);
 
-    NewsModel newsResponseDtoToNews(NewsResponseDto newsResponseDto);
-
+    @Mapping(target = "authorDto", expression =
+                    "java(news.getAuthorId() != null ? authorService.readById(news.getAuthorId()) : null)")
     NewsResponseDto mapNewsToNewsResponseDto(NewsModel news);
 
     List<NewsResponseDto> mapNewsToNewsResponseDtoList(List<NewsModel> newsCollection);

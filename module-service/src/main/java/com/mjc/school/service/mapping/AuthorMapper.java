@@ -18,11 +18,7 @@ public interface AuthorMapper {
     @Mapping(target = "lastUpdateDate", ignore = true)
     AuthorModel mapAuthorRequestDtoToAuthor(AuthorRequestDto authorDtoRequest);
 
-    AuthorModel mapAuthorResponseDtoToAuthor(AuthorResponseDto authorDtoResponse);
-
     AuthorResponseDto mapAuthorToAuthorResponseDto(AuthorModel authorModel);
-
-    AuthorRequestDto mapAuthorToAuthorRequestDto(AuthorModel authorModel);
 
     List<AuthorResponseDto> listAuthorsToAuthorResponseDto(List<AuthorModel> authorModelList);
 }

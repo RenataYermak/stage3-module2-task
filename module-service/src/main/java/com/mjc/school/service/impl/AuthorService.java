@@ -19,11 +19,12 @@ import java.util.List;
 public class AuthorService implements BaseService<AuthorRequestDto, AuthorResponseDto, Long> {
 
     private final AuthorRepository authorRepository;
-    private final AuthorMapper mapper = AuthorMapper.INSTANCE;
+    private final AuthorMapper mapper;
 
     @Autowired
     public AuthorService(AuthorRepository authorRepository) {
         this.authorRepository = authorRepository;
+        this.mapper = AuthorMapper.INSTANCE;
     }
 
     @Validate

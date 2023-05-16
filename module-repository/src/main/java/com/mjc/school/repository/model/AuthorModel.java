@@ -1,6 +1,7 @@
 package com.mjc.school.repository.model;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 public class AuthorModel implements BaseEntity<Long>{
