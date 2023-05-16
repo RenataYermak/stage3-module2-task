@@ -6,6 +6,7 @@ mainClassName = 'com.mjc.school.Main'
 
 dependencies {
     implementation project(':module-web')
+    implementation 'org.projectlombok:lombok:1.18.22'
 }
 
 run {
