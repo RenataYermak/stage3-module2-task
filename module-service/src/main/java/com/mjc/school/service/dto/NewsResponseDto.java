@@ -64,4 +64,16 @@ public class NewsResponseDto {
     public int hashCode() {
         return Objects.hash(id, title, content, createDate, lastUpdateDate, authorId);
     }
+
+    @Override
+    public String toString() {
+        return "NewsResponseDto{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", createDate=" + createDate +
+                ", lastUpdateDate=" + lastUpdateDate +
+                ", authorId=" + authorId +
+                '}';
+    }
 }

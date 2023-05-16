@@ -50,4 +50,14 @@ public class AuthorResponseDto {
     public int hashCode() {
         return Objects.hash(id, name, createDate, lastUpdateDate);
     }
+
+    @Override
+    public String toString() {
+        return "AuthorResponseDto{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", createDate=" + createDate +
+                ", lastUpdateDate=" + lastUpdateDate +
+                '}';
+    }
 }
