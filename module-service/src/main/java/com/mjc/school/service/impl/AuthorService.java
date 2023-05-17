@@ -22,9 +22,9 @@ public class AuthorService implements BaseService<AuthorRequestDto, AuthorRespon
     private final AuthorMapper mapper;
 
     @Autowired
-    public AuthorService(AuthorRepository authorRepository) {
+    public AuthorService(AuthorRepository authorRepository,AuthorMapper mapper) {
         this.authorRepository = authorRepository;
-        this.mapper = AuthorMapper.INSTANCE;
+        this.mapper = mapper;
     }
 
     @Validate
@@ -57,14 +57,14 @@ public class AuthorService implements BaseService<AuthorRequestDto, AuthorRespon
     @Validate(value = "checkAuthor")
     @Override
     public AuthorResponseDto update(AuthorRequestDto authorRequestDto) {
-        if (authorRepository.existById(authorRequestDto.getId())) {
+        if (authorRepository.existById(authorRequestDto.id())) {
             AuthorModel authorModel = mapper.mapAuthorRequestDtoToAuthor(authorRequestDto);
             LocalDateTime localDateTime = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
-            authorModel.setName(authorRequestDto.getName());
+            authorModel.setName(authorRequestDto.name());
             authorModel.setLastUpdateDate(localDateTime);
             return mapper.mapAuthorToAuthorResponseDto(authorRepository.update(authorModel));
         } else {
-            throw new NotFoundException(String.format("Author with ID %d not found.", authorRequestDto.getId()));
+            throw new NotFoundException(String.format("Author with ID %d not found.", authorRequestDto.id()));
         }
     }
 

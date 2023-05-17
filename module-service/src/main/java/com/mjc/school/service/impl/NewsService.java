@@ -7,6 +7,7 @@ import com.mjc.school.service.BaseService;
 import com.mjc.school.service.dto.NewsRequestDto;
 import com.mjc.school.service.dto.NewsResponseDto;
 import com.mjc.school.service.exception.NotFoundException;
+import com.mjc.school.service.mapping.AuthorMapper;
 import com.mjc.school.service.mapping.NewsMapper;
 import com.mjc.school.service.validation.annotation.Validate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +26,10 @@ public class NewsService implements BaseService<NewsRequestDto, NewsResponseDto,
     private final NewsMapper mapper;
 
     @Autowired
-    public NewsService(NewsRepository newsRepository, AuthorRepository authorRepository) {
+    public NewsService(NewsRepository newsRepository, AuthorRepository authorRepository, NewsMapper mapper) {
         this.newsRepository = newsRepository;
         this.authorRepository = authorRepository;
-        this.mapper = NewsMapper.INSTANCE;
+        this.mapper = mapper;
     }
 
     @Override
@@ -50,7 +51,7 @@ public class NewsService implements BaseService<NewsRequestDto, NewsResponseDto,
     @Validate(value = "checkNews")
     @Override
     public NewsResponseDto create(NewsRequestDto newsRequestDto) {
-        if (authorRepository.existById(newsRequestDto.getAuthorId())) {
+        if (authorRepository.existById(newsRequestDto.authorId())) {
             NewsModel news = mapper.mapNewsRequestDtoToNews(newsRequestDto);
             LocalDateTime localDateTime = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
             news.setCreateDate(localDateTime);
@@ -59,26 +60,26 @@ public class NewsService implements BaseService<NewsRequestDto, NewsResponseDto,
             return mapper.mapNewsToNewsResponseDto(savedNews);
         } else {
             throw new NotFoundException(
-                    String.format("Author with ID %d not found.", newsRequestDto.getAuthorId()));
+                    String.format("Author with ID %d not found.", newsRequestDto.authorId()));
         }
     }
 
     @Validate(value = "checkNews")
     @Override
     public NewsResponseDto update(NewsRequestDto newsRequestDto) {
-        if (authorRepository.existById(newsRequestDto.getAuthorId())) {
-            if (newsRepository.existById(newsRequestDto.getId())) {
+        if (authorRepository.existById(newsRequestDto.authorId())) {
+            if (newsRepository.existById(newsRequestDto.id())) {
                 NewsModel news = mapper.mapNewsRequestDtoToNews(newsRequestDto);
                 LocalDateTime updatedDate = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
                 news.setLastUpdateDate(updatedDate);
                 NewsModel savedNews = newsRepository.update(news);
                 return mapper.mapNewsToNewsResponseDto(savedNews);
             } else {
-                throw new NotFoundException(String.format("News with ID %d not found.", newsRequestDto.getId()));
+                throw new NotFoundException(String.format("News with ID %d not found.", newsRequestDto.id()));
             }
         } else {
             throw new NotFoundException(
-                    String.format("Author with ID %d not found.", newsRequestDto.getAuthorId()));
+                    String.format("Author with ID %d not found.", newsRequestDto.authorId()));
         }
     }
 

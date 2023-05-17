@@ -1,13 +1,10 @@
 package com.mjc.school.service.dto;
 
+import lombok.EqualsAndHashCode;
 import lombok.Value;
 
+@EqualsAndHashCode(callSuper = true)
 @Value
-public class NewsRequestDto {
-
-    Long id;
-    String title;
-    String content;
-    Long authorId;
+public record NewsRequestDto(Long id, String title, String content, Long authorId) {
 
 }

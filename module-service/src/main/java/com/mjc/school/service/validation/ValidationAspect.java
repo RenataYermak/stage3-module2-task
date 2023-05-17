@@ -41,16 +41,16 @@ public class ValidationAspect {
         Validate validate = methodSignature.getMethod().getAnnotation(Validate.class);
         String value = validate.value();
         if (value.equals("checkNews")) {
-            validateString(newsRequestDto.getTitle(), NEWS_ID, NEWS_TITLE_MIN, NEWS_TITLE_MAX);
-            validateString(newsRequestDto.getContent(), NEWS_ID, NEWS_CONTENT_MIN, NEWS_CONTENT_MAX);
-            checkNewsId(joinPoint, newsRequestDto.getId());
-            checkNewsId(joinPoint, newsRequestDto.getAuthorId());
+            validateString(newsRequestDto.title(), NEWS_ID, NEWS_TITLE_MIN, NEWS_TITLE_MAX);
+            validateString(newsRequestDto.content(), NEWS_ID, NEWS_CONTENT_MIN, NEWS_CONTENT_MAX);
+            checkNewsId(joinPoint, newsRequestDto.id());
+            checkNewsId(joinPoint, newsRequestDto.authorId());
         }
     }
 
     @Before(value = "@annotation(com.mjc.school.service.validation.annotation.Validate)&&args(authorRequestDto)")
     public void checkAuthorDtoRequest(AuthorRequestDto authorRequestDto) {
-        validateString(authorRequestDto.getName(), AUTHOR_ID, AUTHOR_NAME_MIN, AUTHOR_NAME_MAX);
+        validateString(authorRequestDto.name(), AUTHOR_ID, AUTHOR_NAME_MIN, AUTHOR_NAME_MAX);
     }
 
     void validateString(String value, String parameter, int minNumber, int maxNumber) {

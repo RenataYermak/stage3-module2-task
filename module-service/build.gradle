@@ -4,12 +4,5 @@ dependencies {
     implementation 'org.mapstruct:mapstruct:1.5.3.Final'
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
     implementation 'org.projectlombok:lombok:1.18.22'
-    implementation group: 'org.springframework', name: 'spring-aop', version: '5.3.18'
-    implementation 'org.aspectj:aspectjweaver:1.9.9'
 
-    testImplementation "org.mockito:mockito-core:3.+"
-    implementation 'org.mockito:mockito-junit-jupiter:3.8.0'
-    testImplementation "org.springframework:spring-test:$springVersion"
-    testImplementation "org.junit.jupiter:junit-jupiter-api:$jupiterVersion"
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$jupiterVersion"
 }
